@@ -1,0 +1,30 @@
+<div *ngIf="book; else loading" class="info-box">
+    <div>
+        <h2> {{ book.name }} </h2>
+        <p> {{ book.description }} </p>
+    </div>
+    <div class="details-box">
+        <h3>Publicación:</h3>
+        <p> {{ book.release_date || 'Sin-Fecha' }} </p>
+    </div>
+    <div class="details-box">
+        <h3>Idiomas:</h3>
+        <p> {{ book.languages || 'Sin-Idiomas' }} </p>
+    </div>
+    <div class="details-box">
+        <h3>Autores:</h3>
+        <div *ngFor="let author of book.authors" class="book-author-box">
+            <button class="page-button" routerLink="/authors/{{ author.id }}"> > </button> <p> {{ author.name }} </p>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="loader"></div>
+</ng-template>
+
+<div class="menu-box">
+    <button class="back-button" routerLink="/books">Volver</button>
+    <button *ngIf="book" class="edit-button" routerLink="edit">Editar</button>
+    <button *ngIf="book" class="delete-button">Eliminar</button>
+</div>
