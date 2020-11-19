@@ -1,2 +1,46 @@
-<p>book-edit works!</p>
-{{ editMode }}
+<h1>{{ editMode ? 'Editar' : 'Nuevo' }} Libro</h1>
+<div class="edit-box" [formGroup]="bookForm">
+    <div class="full-section">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" formControlName="name">
+    </div>
+    <div class="full-section">
+        <label for="description">Descripción</label>
+        <textarea name="description" id="description" formControlName="description"></textarea>
+    </div>
+    <div class="half-section">
+        <label for="release_date">Fecha de publicación</label>
+        <input type="date" name="release_date" id="release_date" formControlName="release_date">
+    </div>
+    <div class="half-section">
+        <label for="cover">Link a imagen de portada</label>
+        <input type="text" name="cover" id="cover" formControlName="cover">
+    </div>
+    <div class="half-section">
+        <label for="languages">Idiomas</label>
+        <input type="text" name="languages" id="languages" formControlName="languages">
+    </div>
+    
+    <div class="half-section" formArrayName="authors">
+        <label>Autores</label>
+        <div *ngIf="editMode && book">
+            <div class="authors-box" *ngFor="let author of book.authors">
+                <button class="delete-button" (click)='deleteBookAuthor(author.id)'>X</button>
+                <input type="text" readonly value="{{ author.name }}">
+            </div>
+        </div>
+        <div class="authors-box" *ngFor="let authorControl of authorsForm.controls; index as i">
+            <button class="delete-button" (click)='removeAuthor(i)'>X</button>
+            <select [formControlName]="i">
+                <option *ngFor="let author of authors" [ngValue]="author">{{ author.name }}</option>
+            </select>
+        </div>
+        <button class="edit-button" (click)='addAuthor()'>Agregar autor</button>
+    </div>
+    
+</div>
+
+<div class="menu-box">
+    <button class="back-button" routerLink="..">Volver</button>
+    <button class="new-button" (click)='newBook()'>{{ editMode ? 'Guardar' : 'Crear' }} Libro</button>
+</div>

@@ -11,14 +11,19 @@
         <th>ID</th>
         <th>Nombre</th>
         <th>Fecha</th>
+        <th></th>
     </tr>
     <tr class="table-row" *ngFor="let book of books"  routerLink="/books/{{ book.id }}">
         <td class="table-column">{{ book.id }}</td>
         <td class="table-column">{{ book.name }}</td>
         <td class="table-column">{{ book.release_date }}</td>
+        <td class="table-actions-column">
+            <button class="table-button edit-button" routerLink="/books/{{ book.id }}/edit">Editar</button>
+            <button class="table-button delete-button" routerLink="/books/{{ book.id }}/edit">Eliminar</button>
+        </td>
     </tr>
     <tr class="table-footer">
-        <td colspan="3">
+        <td colspan="4">
 
             <div class="form-box">
                 <label for="pageNumber">Pagina:</label>

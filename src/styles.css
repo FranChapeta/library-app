@@ -40,6 +40,20 @@ html {
 
 }
 
+select,  input, textarea {
+    padding: 0.3rem;
+    width: auto;
+    margin: 0.2rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid rgb(44, 44, 44);
+    border-bottom: 2px solid rgb(44, 44, 44);
+}
+
+input:read-only {
+    background-color: rgb(209, 209, 209);
+}
+
 .navbar {
     background-color: rgb(240, 199, 150);
 }
@@ -77,10 +91,6 @@ th {
     padding: 0.6rem 0% 0.6rem 1%;
 }
 
-.table-column {
-    padding: 0.4rem 0% 0.4rem 1%;
-}
-
 th:first-child {
     border-radius: 0.8rem 0 0 0;
 }
@@ -95,16 +105,8 @@ th:last-child {
     vertical-align: middle !important;
 }
 
-.table-footer select, .table-footer input {
-    padding: 0.3rem;
-    width: auto;
-    height: 32px;
-    margin: 0.2rem;
-    font-size: 1rem;
+.table-footer input, .table-footer select {
     display: inline-block;
-    border-radius: 0.3rem;
-    border: 1px solid rgb(44, 44, 44);
-    border-bottom: 2px solid rgb(44, 44, 44);
 }
 
 .table-footer input {
@@ -122,6 +124,18 @@ th:last-child {
 .table-footer .form-box {
     display: inline-block;
     margin: 0 0.5rem 0 0.8rem;
+}
+
+.table-actions-column {
+    vertical-align: middle;
+    text-align: end;
+    width: 20%;
+}
+
+.table-column {
+    height: 30px;
+    padding-left: 0.5rem;
+    vertical-align: middle;
 }
 
 .info-box {
@@ -176,6 +190,55 @@ th:last-child {
     margin: 0 8px;
 }
 
+.edit-box {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.edit-box label {
+    display: block;
+    font-size: 1.2rem;
+    margin: 1rem 0 0.5rem 0.5rem;
+}
+
+.edit-box input {
+    padding-left: 0.5rem;
+}
+
+.edit-box input, .edit-box select {
+    display: inline-block;
+    width: 100%;
+    min-height: 41px;
+    font-family: inherit;
+}
+
+.edit-box textarea {
+    display: block;
+    width: 100%;
+    min-height: 150px;
+    font-family: inherit;
+}
+
+.authors-box {
+    display: flex;
+}
+
+[class*="-section"] {
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+.full-section {
+    width: 100%;
+}
+
+.half-section {
+    width: 50%;
+}
+
 button {
     font-size: 1.2rem;
     font-weight: 500;
@@ -184,6 +247,20 @@ button {
     border-bottom: 2px solid rgb(44, 44, 44);
     border-radius: 0.3rem;
     cursor: pointer;
+}
+
+.table-button {
+    border: 0px none;
+    border-radius: 0;
+    height: 100%;
+    width: 50%;
+    margin: 0;
+    padding: 0.3rem 0.4rem;
+}
+
+.edit-box button {
+    min-height: 40px;
+    margin: 0.2rem;
 }
 
 .nav-button {
@@ -260,3 +337,17 @@ button {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+@media only screen and (max-width: 768px) {
+    [class*="-section"] {
+      width: 100%;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    .table-button {
+        width: 100%;
+    };
+  }

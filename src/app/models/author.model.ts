@@ -1,13 +1,7 @@
-import {Deserializable} from './deserializable.model';
-
-export class Author implements Deserializable {
+export class Author {
   public id: number;
   public name: string;
-  public birth_date: Date;
+  public birth_date: string;
   public country: string;
-
-  deserialize(input: any): this {
-    return Object.assign(this, input);
-  }
 
 }

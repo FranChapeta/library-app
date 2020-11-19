@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { AuthorsViewComponent } from './authors/authors-view/authors-view.compon
 import { AuthorEditComponent } from './authors/author-edit/author-edit.component';
 import { AuthorDetailsComponent } from './authors/author-details/author-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
     
   ],
   providers: [],
