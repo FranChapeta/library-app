@@ -1,1 +1,24 @@
-<p>author-details works!</p>
+<div *ngIf="author; else loading" class="info-box">
+    <div>
+        <h2> {{ author.name }} </h2>
+        <p> {{ author.description }} </p>
+    </div>
+    <div class="details-box">
+        <h3>Fecha de nacimiento:</h3>
+        <p> {{ author.birth_date ? (author.birth_date | date:'d/MM/y') : ('Sin Fecha') }} </p>
+    </div>
+    <div class="details-box">
+        <h3>País:</h3>
+        <p> {{ author.country || 'Sin-Pais' }} </p>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="loader"></div>
+</ng-template>
+
+<div class="menu-box">
+    <button class="back-button" routerLink="..">Volver</button>
+    <button *ngIf="author" class="edit-button" routerLink="edit">Editar</button>
+    <button *ngIf="author" class="delete-button">Eliminar</button>
+</div>

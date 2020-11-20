@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Author } from 'src/app/models/author.model';
+import { AuthorService } from 'src/app/services/author.service';
 
 @Component({
   selector: 'app-authors-view',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./authors-view.component.css']
 })
 export class AuthorsViewComponent implements OnInit {
+  public authors: Author[];
 
-  constructor() { }
+  constructor(private authorService: AuthorService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.authorService.getAuthors().subscribe(authors => { this.authors = authors } );
+  }
+
+  deleteAuthor(id: number) {
+    this.authorService.deleteAuthor(id).subscribe( response => {
+      if(response.status == 200) {
+        this.authorService.getAuthors().subscribe(authors => { this.authors = authors } );
+      }
+    })
   }
 
 }

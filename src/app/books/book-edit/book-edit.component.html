@@ -1,5 +1,5 @@
 <h1>{{ editMode ? 'Editar' : 'Nuevo' }} Libro</h1>
-<div class="edit-box" [formGroup]="bookForm">
+<div class="edit-box" [formGroup]="bookForm" *ngIf="enableForm; else loading">
     <div class="full-section">
         <label for="name">Nombre</label>
         <input type="text" name="name" id="name" formControlName="name">
@@ -39,6 +39,10 @@
     </div>
     
 </div>
+
+<ng-template #loading>
+    <div class="loader"></div>
+</ng-template>
 
 <div class="menu-box">
     <button class="back-button" routerLink="..">Volver</button>

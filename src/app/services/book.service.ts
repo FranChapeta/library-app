@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map} from 'rxjs/operators';
 import { Book } from '../models/book.model';
@@ -40,26 +40,26 @@ export class BookService {
     );
   }
 
-  public newBook(book: Book): Observable<HttpResponse<{}>> {
-    return this.httpService.post<Book>(`http://localhost:3000/books`, book, { observe: 'response' });
+  public newBook(book: Book): Observable<any> {
+    return this.httpService.post<Book>(`http://localhost:3000/books`, book, httpOptions);
   }
 
-  public updateBook(id: number, book: Book): Observable<HttpResponse<{}>> {
-    return this.httpService.put<Book>(`http://localhost:3000/books/${id}`, book, { observe: 'response' });
+  public updateBook(id: number, book: Book): Observable<any> {
+    return this.httpService.put<Book>(`http://localhost:3000/books/${id}`, book, httpOptions);
   }
 
-  public deleteBook(id: number): Observable<HttpResponse<{}>> {
-    return this.httpService.delete<Book>(`http://localhost:3000/books/${id}`, { observe: 'response' });
+  public deleteBook(id: number): Observable<any> {
+    return this.httpService.delete<Book>(`http://localhost:3000/books/${id}`, httpOptions);
   }
 
-  public newBookAuthor(id: number, author: Author): Observable<HttpResponse<{}>> {
-    return this.httpService.post<Book>(`http://localhost:3000/books/${id}/authors`, author, { observe: 'response' });
+  public deleteBookAuthor(id: number, authorId: number): Observable<any> {
+    return this.httpService.delete<Book>(`http://localhost:3000/books/${id}/authors/${authorId}/`, httpOptions);
   }
-
-  public deleteBookAuthor(id: number, authorId: number): Observable<HttpResponse<{}>> {
-    return this.httpService.delete<Book>(`http://localhost:3000/books/${id}/authors/${authorId}/`, { observe: 'response' });
-  }
-
-
-
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  }),
+  observe: 'response' as const,
+};

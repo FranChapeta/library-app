@@ -84,7 +84,6 @@ th, .table-column {
     border-style: solid;
     border-width: 0 0 1px 0;
     border-color: rgb(95, 95, 95);
-    margin-bottom: 1px;
 }
 
 th {
@@ -130,6 +129,9 @@ th:last-child {
     vertical-align: middle;
     text-align: end;
     width: 20%;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: rgb(95, 95, 95);
 }
 
 .table-column {

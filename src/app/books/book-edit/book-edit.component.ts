@@ -17,6 +17,7 @@ export class BookEditComponent implements OnInit {
   authors: Author[];
   editedBook: Book;
   editMode: boolean;
+  enableForm: boolean = false;
 
   bookForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -58,8 +59,11 @@ export class BookEditComponent implements OnInit {
           this.authorsForm.updateValueAndValidity;
           
           this.bookService.getBookDetails(id)
-            .subscribe(book => { this.book = book; this.updateBookForm(book) }
-          );
+            .subscribe(book => {
+              this.book = book;
+              this.updateBookForm(book);
+              this.enableForm = true;
+            });
         } else {
           this.router.navigate(['/books']);
         }
@@ -68,12 +72,11 @@ export class BookEditComponent implements OnInit {
         this.editMode = false;
         this.authorsForm.setValidators(this.validateSize.bind(this));
         this.authorsForm.updateValueAndValidity;
+        this.enableForm = true;
       }
 
     });
   }
-
-  
 
   addAuthor() {
     this.authorsForm.push(new FormControl('', Validators.required));
@@ -104,11 +107,19 @@ export class BookEditComponent implements OnInit {
     for (let author of this.authorsForm.value) {
       book.authors.push(author);
     };
-    console.log(book);
-  }
-
-  updateBook() {
-
+    if(this.editMode) {
+      this.bookService.updateBook(this.book.id, book).subscribe(response => {
+        if (response.status == 200) {
+          this.router.navigate(['/books', this.book.id]);
+        }
+      })
+    } else {
+      this.bookService.newBook(book).subscribe(response => { 
+        if (response.body.insertId) {
+          this.router.navigate(['/authors', response.body.insertId]);
+        }
+      });
+    }
   }
 
   deleteBookAuthor(authorId: number) {

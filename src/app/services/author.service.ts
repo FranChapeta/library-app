@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map} from 'rxjs/operators';
-import { Book } from '../models/book.model';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Author } from '../models/author.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorService {
-
+  
   constructor(private httpService: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -40,16 +39,23 @@ export class AuthorService {
     );
   }
 
-  public newAuthor(author: Author): Observable<HttpResponse<{}>> {
-    return this.httpService.post<Author>(`http://localhost:3000/authors`, author, { observe: 'response' });
+  public newAuthor(author: Author): Observable<any> {
+    return this.httpService.post<Author>(`http://localhost:3000/authors`, author, httpOptions );
   }
 
-  public updateAuthor(id: number, author: Author): Observable<HttpResponse<{}>> {
-    return this.httpService.put<Author>(`http://localhost:3000/authors/${id}`, author, { observe: 'response' });
+  public updateAuthor(id: number, author: Author): Observable<any> {
+    return this.httpService.put<Author>(`http://localhost:3000/authors/${id}`, author, httpOptions );
   }
 
-  public deleteAuthor(id: number): Observable<HttpResponse<{}>> {
-    return this.httpService.delete<Author>(`http://localhost:3000/authors/${id}`, { observe: 'response' });
+  public deleteAuthor(id: number): Observable<any> {
+    return this.httpService.delete<Author>(`http://localhost:3000/authors/${id}`, httpOptions );
   }
 
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  }),
+  observe: 'response' as const,
+};

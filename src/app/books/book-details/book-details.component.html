@@ -5,7 +5,7 @@
     </div>
     <div class="details-box">
         <h3>Publicación:</h3>
-        <p> {{ book.release_date || 'Sin-Fecha' }} </p>
+        <p> {{ book.release_date ? (book.release_date | date:'d/MM/y') : ('Sin Fecha') }} </p>
     </div>
     <div class="details-box">
         <h3>Idiomas:</h3>
@@ -26,5 +26,5 @@
 <div class="menu-box">
     <button class="back-button" routerLink="/books">Volver</button>
     <button *ngIf="book" class="edit-button" routerLink="edit">Editar</button>
-    <button *ngIf="book" class="delete-button">Eliminar</button>
+    <button *ngIf="book" class="delete-button" (click)="deleteBook()">Eliminar</button>
 </div>
