@@ -29,7 +29,11 @@ export class BookService {
     );
   }
 
-  public getBooks(order: string = 'id', orderType: string = 'DESC', pageSize: number = 20, pageNumber: number = 0): Observable<Book[]> {
+  public getBooks(page?: any): Observable<Book[]> {
+    let order = page.columnOrder || 'id';
+    let orderType = page.orderType || 'ASC';
+    let pageSize = page.pageSize || 20;
+    let pageNumber = page.pageNumber || 0;
     let params = new HttpParams()
       .set('order', order.toString())
       .set('orderType', orderType.toString())

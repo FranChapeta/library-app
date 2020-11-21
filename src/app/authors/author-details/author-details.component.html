@@ -20,5 +20,5 @@
 <div class="menu-box">
     <button class="back-button" routerLink="..">Volver</button>
     <button *ngIf="author" class="edit-button" routerLink="edit">Editar</button>
-    <button *ngIf="author" class="delete-button">Eliminar</button>
+    <button *ngIf="author" class="delete-button" (click)="deleteAuthor()">Eliminar</button>
 </div>
